@@ -39,6 +39,7 @@ impl ToastState {
 }
 
 /// Container for options for initlizing toasts
+#[derive(Clone)]
 pub struct ToastOptions {
     duration: Option<Duration>,
     level: ToastLevel,
@@ -240,13 +241,22 @@ impl Toast {
                 min: pos2(pos.x, pos.y - self.height),
                 max: pos2(pos.x + self.width, pos.y),
             },
+            Anchor::TopCenter => Rect {
+                min: pos2(pos.x - self.width, pos.y),
+                max: pos2(pos.x, pos.y + self.height),
+            },
+            Anchor::BottomCenter => Rect {
+                min: pos2(pos.x, pos.y - self.height),
+                max: pos2(pos.x + self.width, pos.y),
+            },
         }
     }
 
     pub(crate) fn adjust_next_pos(&self, pos: &mut Pos2, anchor: Anchor, spacing: f32) {
+        use Anchor::*;
         match anchor {
-            Anchor::TopRight | Anchor::TopLeft => pos.y += self.height + spacing,
-            Anchor::BottomRight | Anchor::BottomLeft => pos.y -= self.height + spacing,
+            TopRight | TopLeft | TopCenter => pos.y += self.height + spacing,
+            BottomRight | BottomLeft | BottomCenter => pos.y -= self.height + spacing,
         }
     }
 }

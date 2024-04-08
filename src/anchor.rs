@@ -7,10 +7,14 @@ pub enum Anchor {
     TopRight,
     /// Top left corner.
     TopLeft,
+    /// Top center
+    TopCenter,
     /// Bottom right corner.
     BottomRight,
     /// Bottom left corner
     BottomLeft,
+    /// Bottom center
+    BottomCenter,
 }
 
 impl Anchor {
@@ -19,6 +23,7 @@ impl Anchor {
         match self {
             Anchor::TopRight | Anchor::BottomRight => 1.,
             Anchor::TopLeft | Anchor::BottomLeft => -1.,
+            Anchor::TopCenter | Anchor::BottomCenter => 0.0,
         }
     }
 }
@@ -30,6 +35,8 @@ impl Anchor {
             Anchor::TopLeft => pos2(0., 0.),
             Anchor::BottomRight => sc,
             Anchor::BottomLeft => pos2(0., sc.y),
+            Anchor::TopCenter => pos2(sc.x / 2.0, 0.),
+            Anchor::BottomCenter => pos2(sc.x / 2.0, sc.y),
         };
         self.apply_margin(&mut out, margin);
         out
@@ -51,6 +58,12 @@ impl Anchor {
             }
             Anchor::BottomLeft => {
                 pos.x += margin.x;
+                pos.y -= margin.y;
+            }
+            Anchor::TopCenter => {
+                pos.y += margin.y;
+            }
+            Anchor::BottomCenter => {
                 pos.y -= margin.y;
             }
         }
