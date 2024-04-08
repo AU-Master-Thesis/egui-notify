@@ -170,6 +170,18 @@ impl Toasts {
         self.font = Some(font);
         self
     }
+
+    /// Returns the number of toasts
+    #[inline]
+    pub fn len(&self) -> usize {
+        self.toasts.len()
+    }
+
+    /// Returns true if there are no toasts in the queue
+    #[must_use]
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
 impl Toasts {
