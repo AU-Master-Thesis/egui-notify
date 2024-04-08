@@ -97,6 +97,27 @@ impl Toasts {
         }
     }
 
+    /// Removes the oldest toast
+    pub fn remove_oldest_toast(&mut self) {
+        if let Some(toast) = self.toasts.get_mut(0) {
+            toast.disappear();
+        }
+    }
+
+    /// Removes the most recent toast
+    pub fn remove_latest_toast(&mut self) {
+        if let Some(toast) = self.toasts.last_mut() {
+            toast.disappear();
+        }
+    }
+
+    /// Removes all toasts
+    pub fn remove_all_toasts(&mut self) {
+        for toast in self.toasts.iter_mut() {
+            toast.disappear();
+        }
+    }
+
     /// Shortcut for adding a toast with info `success`.
     pub fn success(&mut self, caption: impl Into<String>) -> &mut Toast {
         self.add(Toast::success(caption))
@@ -429,6 +450,7 @@ impl Default for Toasts {
     }
 }
 
+#[inline]
 fn ease_in_cubic(x: f32) -> f32 {
     1. - (1. - x).powi(3)
 }

@@ -219,8 +219,16 @@ impl Toast {
     }
 
     /// Dismiss this toast
+    #[inline]
     pub fn dismiss(&mut self) {
         self.state = ToastState::Disapper;
+    }
+
+    /// Put the toast into state `ToastState::Disappeared` which will remove it the
+    /// next render cycle.
+    #[inline]
+    pub fn disappear(&mut self) {
+        self.state = ToastState::Disappeared;
     }
 
     pub(crate) fn calc_anchored_rect(&self, pos: Pos2, anchor: Anchor) -> Rect {
