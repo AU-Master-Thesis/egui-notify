@@ -241,13 +241,14 @@ impl Toast {
                 min: pos2(pos.x, pos.y - self.height),
                 max: pos2(pos.x + self.width, pos.y),
             },
+
             Anchor::TopCenter => Rect {
-                min: pos2(pos.x - self.width, pos.y),
-                max: pos2(pos.x, pos.y + self.height),
+                min: pos2(pos.x - self.width / 2.0, pos.y),
+                max: pos2(pos.x + self.width / 2.0, pos.y + self.height),
             },
             Anchor::BottomCenter => Rect {
-                min: pos2(pos.x, pos.y - self.height),
-                max: pos2(pos.x + self.width, pos.y),
+                min: pos2(pos.x - self.width / 2.0, pos.y - self.height),
+                max: pos2(pos.x + self.width / 2.0, pos.y),
             },
         }
     }
