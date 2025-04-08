@@ -10,7 +10,7 @@ pub use anchor::*;
 
 #[doc(hidden)]
 pub use egui::__run_test_ctx;
-use egui::{vec2, Color32, Context, FontId, Id, LayerId, Order, Rect, Rounding, Stroke, Vec2};
+use egui::{vec2, Color32, Context, CornerRadius, FontId, Id, LayerId, Order, Rect, Stroke, Vec2};
 
 pub(crate) const TOAST_WIDTH: f32 = 180.;
 pub(crate) const TOAST_HEIGHT: f32 = 34.;
@@ -351,7 +351,7 @@ impl Toasts {
             pos.x -= anim_offset * anchor.anim_side();
 
             // Draw background
-            p.rect_filled(rect, Rounding::same(4.), visuals.bg_fill);
+            p.rect_filled(rect, CornerRadius::same(4), visuals.bg_fill);
 
             // Paint icon
             if let Some((icon_galley, true)) =
