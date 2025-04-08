@@ -68,11 +68,11 @@ impl Toasts {
     pub fn add(&mut self, toast: Toast) -> &mut Toast {
         if self.reverse {
             self.toasts.insert(0, toast);
-            return self.toasts.get_mut(0).unwrap();
+            self.toasts.get_mut(0).unwrap()
         } else {
             self.toasts.push(toast);
             let l = self.toasts.len() - 1;
-            return self.toasts.get_mut(l).unwrap();
+            self.toasts.get_mut(l).unwrap()
         }
     }
 
